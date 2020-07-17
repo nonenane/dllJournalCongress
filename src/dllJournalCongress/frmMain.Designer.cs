@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbObject = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbLandLord = new System.Windows.Forms.TextBox();
+            this.tbTenant = new System.Windows.Forms.TextBox();
+            this.tbAgreement = new System.Windows.Forms.TextBox();
+            this.tbNamePlace = new System.Windows.Forms.TextBox();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chbCongressAccept = new System.Windows.Forms.CheckBox();
+            this.chbDropAgreements = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btAcceptD = new System.Windows.Forms.Button();
+            this.btExit = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
             this.nameLandLord = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameTenant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +58,7 @@
             this.DateDocument = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date_of_Departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.failComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +69,9 @@
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(92, 20);
             this.dtpStart.TabIndex = 0;
+            this.dtpStart.CloseUp += new System.EventHandler(this.dtpStart_CloseUp);
+            this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
+            this.dtpStart.Leave += new System.EventHandler(this.dtpStart_Leave);
             // 
             // label1
             // 
@@ -85,6 +89,9 @@
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(92, 20);
             this.dtpEnd.TabIndex = 0;
+            this.dtpEnd.CloseUp += new System.EventHandler(this.dtpStart_CloseUp);
+            this.dtpEnd.ValueChanged += new System.EventHandler(this.dtpEnd_ValueChanged);
+            this.dtpEnd.Leave += new System.EventHandler(this.dtpStart_Leave);
             // 
             // label2
             // 
@@ -112,34 +119,39 @@
             this.cmbObject.Name = "cmbObject";
             this.cmbObject.Size = new System.Drawing.Size(230, 21);
             this.cmbObject.TabIndex = 3;
+            this.cmbObject.SelectionChangeCommitted += new System.EventHandler(this.cmbObject_SelectionChangeCommitted);
             // 
-            // textBox1
+            // tbLandLord
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.tbLandLord.Location = new System.Drawing.Point(12, 36);
+            this.tbLandLord.Name = "tbLandLord";
+            this.tbLandLord.Size = new System.Drawing.Size(100, 20);
+            this.tbLandLord.TabIndex = 4;
+            this.tbLandLord.TextChanged += new System.EventHandler(this.tbLandLord_TextChanged);
             // 
-            // textBox2
+            // tbTenant
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.tbTenant.Location = new System.Drawing.Point(118, 36);
+            this.tbTenant.Name = "tbTenant";
+            this.tbTenant.Size = new System.Drawing.Size(100, 20);
+            this.tbTenant.TabIndex = 4;
+            this.tbTenant.TextChanged += new System.EventHandler(this.tbLandLord_TextChanged);
             // 
-            // textBox3
+            // tbAgreement
             // 
-            this.textBox3.Location = new System.Drawing.Point(224, 36);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 4;
+            this.tbAgreement.Location = new System.Drawing.Point(224, 36);
+            this.tbAgreement.Name = "tbAgreement";
+            this.tbAgreement.Size = new System.Drawing.Size(100, 20);
+            this.tbAgreement.TabIndex = 4;
+            this.tbAgreement.TextChanged += new System.EventHandler(this.tbLandLord_TextChanged);
             // 
-            // textBox4
+            // tbNamePlace
             // 
-            this.textBox4.Location = new System.Drawing.Point(330, 36);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 4;
+            this.tbNamePlace.Location = new System.Drawing.Point(330, 36);
+            this.tbNamePlace.Name = "tbNamePlace";
+            this.tbNamePlace.Size = new System.Drawing.Size(100, 20);
+            this.tbNamePlace.TabIndex = 4;
+            this.tbNamePlace.TextChanged += new System.EventHandler(this.tbLandLord_TextChanged);
             // 
             // dgvData
             // 
@@ -150,14 +162,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameLandLord,
@@ -177,30 +189,36 @@
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(1012, 420);
             this.dgvData.TabIndex = 5;
+            this.dgvData.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvData_ColumnWidthChanged);
+            this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
+            this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
+            this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
             // 
-            // checkBox1
+            // chbCongressAccept
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(40, 516);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(133, 17);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "- съезд подтвержден";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chbCongressAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbCongressAccept.AutoSize = true;
+            this.chbCongressAccept.Checked = true;
+            this.chbCongressAccept.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbCongressAccept.Location = new System.Drawing.Point(40, 516);
+            this.chbCongressAccept.Name = "chbCongressAccept";
+            this.chbCongressAccept.Size = new System.Drawing.Size(133, 17);
+            this.chbCongressAccept.TabIndex = 6;
+            this.chbCongressAccept.Text = "- съезд подтвержден";
+            this.chbCongressAccept.UseVisualStyleBackColor = true;
+            this.chbCongressAccept.CheckedChanged += new System.EventHandler(this.chbDropAgreements_CheckedChanged);
             // 
-            // checkBox2
+            // chbDropAgreements
             // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(40, 541);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(329, 17);
-            this.checkBox2.TabIndex = 6;
-            this.checkBox2.Text = "- аннуляция подтверждена\\имеется расторжение договора";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chbDropAgreements.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbDropAgreements.AutoSize = true;
+            this.chbDropAgreements.Location = new System.Drawing.Point(40, 541);
+            this.chbDropAgreements.Name = "chbDropAgreements";
+            this.chbDropAgreements.Size = new System.Drawing.Size(329, 17);
+            this.chbDropAgreements.TabIndex = 6;
+            this.chbDropAgreements.Text = "- аннуляция подтверждена\\имеется расторжение договора";
+            this.chbDropAgreements.UseVisualStyleBackColor = true;
+            this.chbDropAgreements.CheckedChanged += new System.EventHandler(this.chbDropAgreements_CheckedChanged);
             // 
             // label4
             // 
@@ -242,106 +260,127 @@
             this.panel3.Size = new System.Drawing.Size(19, 19);
             this.panel3.TabIndex = 8;
             // 
-            // button1
+            // btAcceptD
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(540, 499);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(48, 48);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btAcceptD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAcceptD.Location = new System.Drawing.Point(540, 499);
+            this.btAcceptD.Name = "btAcceptD";
+            this.btAcceptD.Size = new System.Drawing.Size(48, 48);
+            this.btAcceptD.TabIndex = 9;
+            this.btAcceptD.UseVisualStyleBackColor = true;
+            this.btAcceptD.Click += new System.EventHandler(this.btAcceptD_Click);
             // 
-            // button2
+            // btExit
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(992, 526);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 32);
-            this.button2.TabIndex = 9;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExit.Location = new System.Drawing.Point(992, 526);
+            this.btExit.Name = "btExit";
+            this.btExit.Size = new System.Drawing.Size(32, 32);
+            this.btExit.TabIndex = 9;
+            this.btExit.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btPrint
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(954, 526);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(32, 32);
-            this.button3.TabIndex = 9;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btPrint.Location = new System.Drawing.Point(954, 526);
+            this.btPrint.Name = "btPrint";
+            this.btPrint.Size = new System.Drawing.Size(32, 32);
+            this.btPrint.TabIndex = 9;
+            this.btPrint.UseVisualStyleBackColor = true;
             // 
             // nameLandLord
             // 
+            this.nameLandLord.DataPropertyName = "nameLandLord";
             this.nameLandLord.HeaderText = "Арендодатель";
             this.nameLandLord.Name = "nameLandLord";
             this.nameLandLord.ReadOnly = true;
             // 
             // nameTenant
             // 
+            this.nameTenant.DataPropertyName = "nameTenant";
             this.nameTenant.HeaderText = "Арендатор";
             this.nameTenant.Name = "nameTenant";
             this.nameTenant.ReadOnly = true;
             // 
             // nameObject
             // 
+            this.nameObject.DataPropertyName = "nameObject";
             this.nameObject.HeaderText = "Объект аренды";
             this.nameObject.Name = "nameObject";
             this.nameObject.ReadOnly = true;
             // 
             // Agreement
             // 
+            this.Agreement.DataPropertyName = "Agreement";
             this.Agreement.HeaderText = "Номер договора";
             this.Agreement.Name = "Agreement";
             this.Agreement.ReadOnly = true;
             // 
             // namePlace
             // 
+            this.namePlace.DataPropertyName = "namePlace";
             this.namePlace.HeaderText = "Местоположение места аренды";
             this.namePlace.Name = "namePlace";
             this.namePlace.ReadOnly = true;
             // 
             // Cost_of_Meter
             // 
+            this.Cost_of_Meter.DataPropertyName = "Cost_of_Meter";
             this.Cost_of_Meter.HeaderText = "Стоимость 1м2";
             this.Cost_of_Meter.Name = "Cost_of_Meter";
             this.Cost_of_Meter.ReadOnly = true;
             // 
             // DateDocument
             // 
+            this.DateDocument.DataPropertyName = "DateDocument";
             this.DateDocument.HeaderText = "Дата подачи заявления";
             this.DateDocument.Name = "DateDocument";
             this.DateDocument.ReadOnly = true;
             // 
             // Date_of_Departure
             // 
+            this.Date_of_Departure.DataPropertyName = "Date_of_Departure";
             this.Date_of_Departure.HeaderText = "Планируемая дата съезда";
             this.Date_of_Departure.Name = "Date_of_Departure";
             this.Date_of_Departure.ReadOnly = true;
             // 
             // failComment
             // 
+            this.failComment.DataPropertyName = "failComment";
             this.failComment.HeaderText = "Примечание";
             this.failComment.Name = "failComment";
             this.failComment.ReadOnly = true;
+            // 
+            // btUpdate
+            // 
+            this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btUpdate.Location = new System.Drawing.Point(976, 8);
+            this.btUpdate.Name = "btUpdate";
+            this.btUpdate.Size = new System.Drawing.Size(48, 48);
+            this.btUpdate.TabIndex = 10;
+            this.btUpdate.UseVisualStyleBackColor = true;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 573);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btUpdate);
+            this.Controls.Add(this.btPrint);
+            this.Controls.Add(this.btExit);
+            this.Controls.Add(this.btAcceptD);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chbDropAgreements);
+            this.Controls.Add(this.chbCongressAccept);
             this.Controls.Add(this.dgvData);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbNamePlace);
+            this.Controls.Add(this.tbAgreement);
+            this.Controls.Add(this.tbTenant);
+            this.Controls.Add(this.tbLandLord);
             this.Controls.Add(this.cmbObject);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -367,20 +406,20 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbObject;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbLandLord;
+        private System.Windows.Forms.TextBox tbTenant;
+        private System.Windows.Forms.TextBox tbAgreement;
+        private System.Windows.Forms.TextBox tbNamePlace;
         private System.Windows.Forms.DataGridView dgvData;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chbCongressAccept;
+        private System.Windows.Forms.CheckBox chbDropAgreements;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btAcceptD;
+        private System.Windows.Forms.Button btExit;
+        private System.Windows.Forms.Button btPrint;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameLandLord;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameTenant;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameObject;
@@ -390,6 +429,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DateDocument;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date_of_Departure;
         private System.Windows.Forms.DataGridViewTextBoxColumn failComment;
+        private System.Windows.Forms.Button btUpdate;
     }
 }
 

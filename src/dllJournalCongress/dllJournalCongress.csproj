@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\frameWork_mew\Framework\bin\Debug\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Framework">
       <HintPath>..\..\..\..\DLL\Framework.dll</HintPath>
     </Reference>

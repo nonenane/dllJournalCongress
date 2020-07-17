@@ -18,8 +18,6 @@ namespace dllJournalCongress
         }
         ArrayList ap = new ArrayList();
 
-        #region "Справочник рекламных мест"
-
         /// <summary>
         /// Получение списка объектов
         /// </summary>
@@ -50,6 +48,7 @@ namespace dllJournalCongress
                     row["cName"] = "Все Объекты";
                     row["id"] = 0;
                     row["isMain"] = 0;
+                    row["isActive"] = 1;
                     dtResult.Rows.Add(row);
                     dtResult.AcceptChanges();
                     dtResult.DefaultView.RowFilter = "isActive = 1";
@@ -68,6 +67,21 @@ namespace dllJournalCongress
         }
 
 
-        #endregion
+        /// <summary>
+        /// Получение Журнала съездов
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>Таблица с данными</returns>        
+        public async Task<DataTable> getJournalCongress(DateTime dateStart, DateTime dateEnd)
+        {
+            ap.Clear();
+            ap.Add(dateStart);
+            ap.Add(dateEnd);
+
+            return executeProcedure("[Arenda].[spg_getJournalCongress]",
+                 new string[2] { "@dateStart", "@dateEnd" },
+                 new DbType[2] { DbType.Date, DbType.Date }, ap);
+            
+        }
     }
 }
