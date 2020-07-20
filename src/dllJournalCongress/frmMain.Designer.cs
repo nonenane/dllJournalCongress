@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,15 +41,6 @@
             this.tbAgreement = new System.Windows.Forms.TextBox();
             this.tbNamePlace = new System.Windows.Forms.TextBox();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.chbCongressAccept = new System.Windows.Forms.CheckBox();
-            this.chbDropAgreements = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btAcceptD = new System.Windows.Forms.Button();
-            this.btExit = new System.Windows.Forms.Button();
-            this.btPrint = new System.Windows.Forms.Button();
             this.nameLandLord = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameTenant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,7 +50,16 @@
             this.DateDocument = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date_of_Departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.failComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chbCongressAccept = new System.Windows.Forms.CheckBox();
+            this.chbDropAgreements = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btUpdate = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btExit = new System.Windows.Forms.Button();
+            this.btAcceptD = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,14 +163,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameLandLord,
@@ -181,6 +182,14 @@
             this.DateDocument,
             this.Date_of_Departure,
             this.failComment});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvData.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvData.Location = new System.Drawing.Point(12, 62);
             this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
@@ -193,6 +202,69 @@
             this.dgvData.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvData_RowPostPaint);
             this.dgvData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvData_RowPrePaint);
             this.dgvData.SelectionChanged += new System.EventHandler(this.dgvData_SelectionChanged);
+            // 
+            // nameLandLord
+            // 
+            this.nameLandLord.DataPropertyName = "nameLandLord";
+            this.nameLandLord.HeaderText = "Арендодатель";
+            this.nameLandLord.Name = "nameLandLord";
+            this.nameLandLord.ReadOnly = true;
+            // 
+            // nameTenant
+            // 
+            this.nameTenant.DataPropertyName = "nameTenant";
+            this.nameTenant.HeaderText = "Арендатор";
+            this.nameTenant.Name = "nameTenant";
+            this.nameTenant.ReadOnly = true;
+            // 
+            // nameObject
+            // 
+            this.nameObject.DataPropertyName = "nameObject";
+            this.nameObject.HeaderText = "Объект аренды";
+            this.nameObject.Name = "nameObject";
+            this.nameObject.ReadOnly = true;
+            // 
+            // Agreement
+            // 
+            this.Agreement.DataPropertyName = "Agreement";
+            this.Agreement.HeaderText = "Номер договора";
+            this.Agreement.Name = "Agreement";
+            this.Agreement.ReadOnly = true;
+            // 
+            // namePlace
+            // 
+            this.namePlace.DataPropertyName = "namePlace";
+            this.namePlace.HeaderText = "Местоположение места аренды";
+            this.namePlace.Name = "namePlace";
+            this.namePlace.ReadOnly = true;
+            // 
+            // Cost_of_Meter
+            // 
+            this.Cost_of_Meter.DataPropertyName = "Cost_of_Meter";
+            this.Cost_of_Meter.HeaderText = "Стоимость 1м2";
+            this.Cost_of_Meter.Name = "Cost_of_Meter";
+            this.Cost_of_Meter.ReadOnly = true;
+            // 
+            // DateDocument
+            // 
+            this.DateDocument.DataPropertyName = "DateDocument";
+            this.DateDocument.HeaderText = "Дата подачи заявления";
+            this.DateDocument.Name = "DateDocument";
+            this.DateDocument.ReadOnly = true;
+            // 
+            // Date_of_Departure
+            // 
+            this.Date_of_Departure.DataPropertyName = "Date_of_Departure";
+            this.Date_of_Departure.HeaderText = "Планируемая дата съезда";
+            this.Date_of_Departure.Name = "Date_of_Departure";
+            this.Date_of_Departure.ReadOnly = true;
+            // 
+            // failComment
+            // 
+            this.failComment.DataPropertyName = "failComment";
+            this.failComment.HeaderText = "Примечание";
+            this.failComment.Name = "failComment";
+            this.failComment.ReadOnly = true;
             // 
             // chbCongressAccept
             // 
@@ -260,106 +332,48 @@
             this.panel3.Size = new System.Drawing.Size(19, 19);
             this.panel3.TabIndex = 8;
             // 
-            // btAcceptD
-            // 
-            this.btAcceptD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAcceptD.Location = new System.Drawing.Point(540, 499);
-            this.btAcceptD.Name = "btAcceptD";
-            this.btAcceptD.Size = new System.Drawing.Size(48, 48);
-            this.btAcceptD.TabIndex = 9;
-            this.btAcceptD.UseVisualStyleBackColor = true;
-            this.btAcceptD.Click += new System.EventHandler(this.btAcceptD_Click);
-            // 
-            // btExit
-            // 
-            this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExit.Location = new System.Drawing.Point(992, 526);
-            this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(32, 32);
-            this.btExit.TabIndex = 9;
-            this.btExit.UseVisualStyleBackColor = true;
-            // 
-            // btPrint
-            // 
-            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btPrint.Location = new System.Drawing.Point(954, 526);
-            this.btPrint.Name = "btPrint";
-            this.btPrint.Size = new System.Drawing.Size(32, 32);
-            this.btPrint.TabIndex = 9;
-            this.btPrint.UseVisualStyleBackColor = true;
-            // 
-            // nameLandLord
-            // 
-            this.nameLandLord.DataPropertyName = "nameLandLord";
-            this.nameLandLord.HeaderText = "Арендодатель";
-            this.nameLandLord.Name = "nameLandLord";
-            this.nameLandLord.ReadOnly = true;
-            // 
-            // nameTenant
-            // 
-            this.nameTenant.DataPropertyName = "nameTenant";
-            this.nameTenant.HeaderText = "Арендатор";
-            this.nameTenant.Name = "nameTenant";
-            this.nameTenant.ReadOnly = true;
-            // 
-            // nameObject
-            // 
-            this.nameObject.DataPropertyName = "nameObject";
-            this.nameObject.HeaderText = "Объект аренды";
-            this.nameObject.Name = "nameObject";
-            this.nameObject.ReadOnly = true;
-            // 
-            // Agreement
-            // 
-            this.Agreement.DataPropertyName = "Agreement";
-            this.Agreement.HeaderText = "Номер договора";
-            this.Agreement.Name = "Agreement";
-            this.Agreement.ReadOnly = true;
-            // 
-            // namePlace
-            // 
-            this.namePlace.DataPropertyName = "namePlace";
-            this.namePlace.HeaderText = "Местоположение места аренды";
-            this.namePlace.Name = "namePlace";
-            this.namePlace.ReadOnly = true;
-            // 
-            // Cost_of_Meter
-            // 
-            this.Cost_of_Meter.DataPropertyName = "Cost_of_Meter";
-            this.Cost_of_Meter.HeaderText = "Стоимость 1м2";
-            this.Cost_of_Meter.Name = "Cost_of_Meter";
-            this.Cost_of_Meter.ReadOnly = true;
-            // 
-            // DateDocument
-            // 
-            this.DateDocument.DataPropertyName = "DateDocument";
-            this.DateDocument.HeaderText = "Дата подачи заявления";
-            this.DateDocument.Name = "DateDocument";
-            this.DateDocument.ReadOnly = true;
-            // 
-            // Date_of_Departure
-            // 
-            this.Date_of_Departure.DataPropertyName = "Date_of_Departure";
-            this.Date_of_Departure.HeaderText = "Планируемая дата съезда";
-            this.Date_of_Departure.Name = "Date_of_Departure";
-            this.Date_of_Departure.ReadOnly = true;
-            // 
-            // failComment
-            // 
-            this.failComment.DataPropertyName = "failComment";
-            this.failComment.HeaderText = "Примечание";
-            this.failComment.Name = "failComment";
-            this.failComment.ReadOnly = true;
-            // 
             // btUpdate
             // 
             this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btUpdate.Image = global::dllJournalCongress.Properties.Resources.reload_8055;
             this.btUpdate.Location = new System.Drawing.Point(976, 8);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(48, 48);
             this.btUpdate.TabIndex = 10;
             this.btUpdate.UseVisualStyleBackColor = true;
             this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
+            // 
+            // btPrint
+            // 
+            this.btPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btPrint.Image = global::dllJournalCongress.Properties.Resources.klpq_2511;
+            this.btPrint.Location = new System.Drawing.Point(954, 526);
+            this.btPrint.Name = "btPrint";
+            this.btPrint.Size = new System.Drawing.Size(32, 32);
+            this.btPrint.TabIndex = 9;
+            this.btPrint.UseVisualStyleBackColor = true;
+            this.btPrint.Click += new System.EventHandler(this.btPrint_Click);
+            // 
+            // btExit
+            // 
+            this.btExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExit.Image = global::dllJournalCongress.Properties.Resources.exit_8633;
+            this.btExit.Location = new System.Drawing.Point(992, 526);
+            this.btExit.Name = "btExit";
+            this.btExit.Size = new System.Drawing.Size(32, 32);
+            this.btExit.TabIndex = 9;
+            this.btExit.UseVisualStyleBackColor = true;
+            // 
+            // btAcceptD
+            // 
+            this.btAcceptD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAcceptD.Image = global::dllJournalCongress.Properties.Resources.like;
+            this.btAcceptD.Location = new System.Drawing.Point(540, 499);
+            this.btAcceptD.Name = "btAcceptD";
+            this.btAcceptD.Size = new System.Drawing.Size(48, 48);
+            this.btAcceptD.TabIndex = 9;
+            this.btAcceptD.UseVisualStyleBackColor = true;
+            this.btAcceptD.Click += new System.EventHandler(this.btAcceptD_Click);
             // 
             // frmMain
             // 

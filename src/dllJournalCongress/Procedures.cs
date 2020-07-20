@@ -83,5 +83,23 @@ namespace dllJournalCongress
                  new DbType[2] { DbType.Date, DbType.Date }, ap);
             
         }
+
+        /// <summary>
+        /// Подтверждение или аннуляция съезда
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>Таблица с данными</returns>        
+        public async Task<DataTable> setJournalCongress(int id)
+        {
+            ap.Clear();
+            ap.Add(id);
+            ap.Add(UserSettings.User.Id);
+
+
+            return executeProcedure("[Arenda].[spg_setJournalCongress]",
+                 new string[2] { "@id", "@id_user" },
+                 new DbType[2] { DbType.Int32, DbType.Int32 }, ap);
+
+        }
     }
 }

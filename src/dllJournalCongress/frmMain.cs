@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Nwuram.Framework.Settings.User;
+
 
 namespace dllJournalCongress
 {
@@ -19,6 +21,11 @@ namespace dllJournalCongress
         {
             InitializeComponent();
             dgvData.AutoGenerateColumns = false;
+            ToolTip tp = new ToolTip();
+            tp.SetToolTip(btExit,"Выход");
+            tp.SetToolTip(btPrint, "Печать");
+            tp.SetToolTip(btUpdate, "Обновить");
+            tp.SetToolTip(btAcceptD, "Подтвердить");
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -26,6 +33,7 @@ namespace dllJournalCongress
             dtpStart.Value = DateTime.Now.AddMonths(-1);
             dtpEnd.Value = DateTime.Now.AddMonths(2);
 
+            btAcceptD.Visible = new List<string> { "Д" }.Contains(UserSettings.User.StatusCode);
 
             Task<DataTable> task = Config.hCntMain.getObjectLease(true);
             task.Wait();
@@ -141,7 +149,7 @@ namespace dllJournalCongress
             {
 
                 Color rColor = Color.White;
-                if (!(bool)dtData.DefaultView[e.RowIndex]["isLinkPetitionLeave"] && (bool)dtData.DefaultView[e.RowIndex]["isConfirmed"])
+                if ((!(bool)dtData.DefaultView[e.RowIndex]["isLinkPetitionLeave"] || !(bool)dtData.DefaultView[e.RowIndex]["isConfirmed_LinkPetitionLeave"]) && (bool)dtData.DefaultView[e.RowIndex]["isConfirmed"])
                     rColor = panel2.BackColor;
 
                 if ((bool)dtData.DefaultView[e.RowIndex]["isLinkPetitionLeave"] && (bool)dtData.DefaultView[e.RowIndex]["isConfirmed_LinkPetitionLeave"])
@@ -225,6 +233,12 @@ namespace dllJournalCongress
 
             btAcceptD.Enabled = !(bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isConfirmed"] 
                 || (!(bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isConfirmed_LinkPetitionLeave"] && (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isLinkPetitionLeave"]);
+
+            new ToolTip().SetToolTip(btAcceptD, "Подтвердить съезд");
+            if((!(bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isConfirmed_LinkPetitionLeave"] && (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isLinkPetitionLeave"]))
+                new ToolTip().SetToolTip(btAcceptD, "Подтвердить аннуляцию съезда");
+
+
         }
 
         private void btAcceptD_Click(object sender, EventArgs e)
@@ -233,8 +247,187 @@ namespace dllJournalCongress
             {
                 int id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id"];
                 bool isLinkPetitionLeave = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isLinkPetitionLeave"];
-                if(isLinkPetitionLeave) id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id_LinkPetitionLeave"];
+                bool isConfirmed = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isConfirmed"];
+
+
+                if (isLinkPetitionLeave)
+                {
+                    id = (int)dtData.DefaultView[dgvData.CurrentRow.Index]["id_LinkPetitionLeave"];
+                    isConfirmed = (bool)dtData.DefaultView[dgvData.CurrentRow.Index]["isConfirmed_LinkPetitionLeave"];
+                }
+
+                if (!isConfirmed)
+                {
+                    if (isLinkPetitionLeave)
+                    {
+                        if (DialogResult.No == MessageBox.Show(Config.centralText("Вы действительно хотите\nподтвердить аннуляцию\nзаявления на съезд?\n"), "Подтверждение аннуляции съезда", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                            return;
+                    }
+                    else
+                    {
+                        if (DialogResult.No == MessageBox.Show(Config.centralText("Вы действительно хотите\nподтвердить заявление на съезд?\n"), "Подтверждение съезда", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                            return;
+                    }
+
+
+                    Task<DataTable> task = Config.hCntMain.setJournalCongress(id);
+
+                    if (task.Result == null)
+                    {
+                        MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int result = (int)task.Result.Rows[0]["id"];
+
+                    if (result != 0)
+                    {
+                        MessageBox.Show(Config.centralText("При сохранение данных возникли ошибки записи.\nОбратитесь в ОЭЭС\n"), "Сохранение данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    getData();
+                }
             }
+        }
+
+        private void btPrint_Click(object sender, EventArgs e)
+        {
+            if (dgvData.Rows.Count == 0)
+            {
+                MessageBox.Show("Нет данных для формирования отчёта!","Выгрузка отчёта",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
+
+            Nwuram.Framework.ToExcelNew.ExcelUnLoad report = new Nwuram.Framework.ToExcelNew.ExcelUnLoad();
+            int indexRow = 1;
+            int maxColumns = 0;
+
+            foreach (DataGridViewColumn col in dgvData.Columns)
+                if (col.Visible) maxColumns++;
+
+            setWidthColumn(indexRow, 1, 25, report);
+            setWidthColumn(indexRow, 2, 23, report);
+            setWidthColumn(indexRow, 3, 14, report);
+            setWidthColumn(indexRow, 4, 11, report);
+            setWidthColumn(indexRow, 5, 50, report);
+            setWidthColumn(indexRow, 6, 16, report);
+            setWidthColumn(indexRow, 7, 13, report);
+            setWidthColumn(indexRow, 8, 15, report);
+            setWidthColumn(indexRow, 9, 13, report);
+            
+
+            #region "Head"
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue("Отчёт по съездам арендаторов", indexRow, 1);
+            report.SetFontBold(indexRow, 1, indexRow, 1);
+            report.SetFontSize(indexRow, 1, indexRow, 1, 16);
+            report.SetCellAlignmentToCenter(indexRow, 1, indexRow, 1);
+            indexRow++;
+            indexRow++;
+
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue($"Период с {dtpStart.Value.ToShortDateString()} по {dtpEnd.Value.ToShortDateString()}", indexRow, 1);
+            indexRow++;
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue($"Объект аренды: {cmbObject.Text}", indexRow, 1);
+            indexRow++;
+
+            if (tbLandLord.Text.Trim().Length > 0 || tbTenant.Text.Trim().Length > 0 || tbAgreement.Text.Trim().Length > 0 || tbNamePlace.Text.Trim().Length > 0)
+            {
+                report.Merge(indexRow, 1, indexRow, maxColumns);
+                report.AddSingleValue($"Фильтры: " +
+                    $"{(tbLandLord.Text.Trim().Length > 0 ? $"Арендодатель: {tbLandLord.Text.Trim()}" : "")}; " +
+                    $"{(tbLandLord.Text.Trim().Length > 0 ? $"Арендатор: {tbTenant.Text.Trim()}" : "")}; " +
+                    $"{(tbLandLord.Text.Trim().Length > 0 ? $"Номер договора: {tbAgreement.Text.Trim()}" : "")}; " +
+                    $"{(tbLandLord.Text.Trim().Length > 0 ? $"Местоположение места аренды: {tbNamePlace.Text.Trim()}" : "")}; ", indexRow, 1);
+                indexRow++;
+            }
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue("Выгрузил: " + Nwuram.Framework.Settings.User.UserSettings.User.FullUsername, indexRow, 1);
+            indexRow++;
+
+            report.Merge(indexRow, 1, indexRow, maxColumns);
+            report.AddSingleValue("Дата выгрузки: " + DateTime.Now.ToString(), indexRow, 1);
+            indexRow++;
+            indexRow++;
+            #endregion
+
+            int indexColumn = 0;
+            foreach (DataGridViewColumn col in dgvData.Columns)
+            {
+                if (col.Visible) { indexColumn++;
+                    report.AddSingleValue(col.HeaderText, indexRow, indexColumn);
+                    report.SetWrapText(indexRow, indexColumn, indexRow, indexColumn);
+                }
+            }
+            report.SetFontBold(indexRow, 1, indexRow, maxColumns);
+            report.SetBorders(indexRow, 1, indexRow, maxColumns);
+            report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+            indexRow++;
+
+
+            foreach (DataGridViewRow row in dgvData.Rows)
+            {
+                Color rColor = Color.White;
+                if ((!(bool)dtData.DefaultView[row.Index]["isLinkPetitionLeave"] || !(bool)dtData.DefaultView[row.Index]["isConfirmed_LinkPetitionLeave"]) && (bool)dtData.DefaultView[row.Index]["isConfirmed"])
+                    rColor = panel2.BackColor;
+
+                if ((bool)dtData.DefaultView[row.Index]["isLinkPetitionLeave"] && (bool)dtData.DefaultView[row.Index]["isConfirmed_LinkPetitionLeave"])
+                    rColor = panel3.BackColor;
+                else if (dtData.DefaultView[row.Index]["isCancelAgreements"] != DBNull.Value && (bool)dtData.DefaultView[row.Index]["isConfirmed"])
+                    rColor = panel3.BackColor;
+
+                report.SetCellColor(indexRow, 1, indexRow, maxColumns, rColor);
+
+                indexColumn = 0;
+                foreach (DataGridViewColumn col in dgvData.Columns)
+                {                    
+                    if (col.Visible)
+                    {
+                        indexColumn++;
+                        if (row.Cells[col.Index].Value is DateTime)
+                            report.AddSingleValue(((DateTime)row.Cells[col.Index].Value).ToShortDateString(), indexRow, indexColumn);
+                        else
+                            report.AddSingleValue(row.Cells[col.Index].Value.ToString(), indexRow, indexColumn);
+                        report.SetWrapText(indexRow, indexColumn, indexRow, indexColumn);
+                        if ((bool)dtData.DefaultView[row.Index]["isLinkPetitionLeave"] && col.Index == Date_of_Departure.Index)
+                            report.SetCellColor(indexRow, indexColumn, indexRow, indexColumn, panel1.BackColor);
+                    }
+                }
+               
+                report.SetBorders(indexRow, 1, indexRow, maxColumns);
+                report.SetCellAlignmentToCenter(indexRow, 1, indexRow, maxColumns);
+                report.SetCellAlignmentToJustify(indexRow, 1, indexRow, maxColumns);
+                indexRow++;
+            }
+
+
+            indexRow++;
+            report.Merge(indexRow, 2, indexRow, maxColumns);
+            report.SetCellColor(indexRow, 1, indexRow, 1, panel1.BackColor);
+            report.AddSingleValue($"{label4.Text}", indexRow, 2);
+            indexRow++;
+
+            report.Merge(indexRow, 2, indexRow, maxColumns);
+            report.SetCellColor(indexRow, 1, indexRow, 1, panel2.BackColor);
+            report.AddSingleValue($"{chbCongressAccept.Text}", indexRow, 2);
+            indexRow++;
+
+            report.Merge(indexRow, 2, indexRow, maxColumns);
+            report.SetCellColor(indexRow, 1, indexRow, 1, panel3.BackColor);
+            report.AddSingleValue($"{chbDropAgreements.Text}", indexRow, 2);
+            report.SetPageSetup(1, 9999, true);
+
+            report.Show();
+        }
+
+        private void setWidthColumn(int indexRow, int indexCol, int width, Nwuram.Framework.ToExcelNew.ExcelUnLoad report)
+        {
+            report.SetColumnWidth(indexRow, indexCol, indexRow, indexCol, width);
         }
 
         private void dtpStart_Leave(object sender, EventArgs e)

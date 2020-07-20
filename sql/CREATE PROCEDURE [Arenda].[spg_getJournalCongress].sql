@@ -17,8 +17,8 @@ BEGIN
 select 
 	ad.id,
 	ddd.id as id_LinkPetitionLeave,
-	torg.Abbreviation+' ' + torg.cName as nameLandLord,
-	torgt.Abbreviation+' ' + torgt.cName as nameTenant,
+	torg.Abbreviation+' ' + lt.cName as nameLandLord,
+	torgt.Abbreviation+' ' + ltt.cName as nameTenant,
 	ol.cName as nameObject,
 	a.Agreement,	
 	--
