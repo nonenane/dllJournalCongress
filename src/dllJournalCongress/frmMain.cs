@@ -431,6 +431,11 @@ namespace dllJournalCongress
             report.SetColumnWidth(indexRow, indexCol, indexRow, indexCol, width);
         }
 
+        private void btExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void dtpStart_Leave(object sender, EventArgs e)
         {
             if (isChangeValue)

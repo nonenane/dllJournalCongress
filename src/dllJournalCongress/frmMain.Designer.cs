@@ -361,6 +361,7 @@
             this.btExit.Size = new System.Drawing.Size(32, 32);
             this.btExit.TabIndex = 9;
             this.btExit.UseVisualStyleBackColor = true;
+            this.btExit.Click += new System.EventHandler(this.btExit_Click);
             // 
             // btAcceptD
             // 
