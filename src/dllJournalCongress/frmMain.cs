@@ -102,7 +102,7 @@ namespace dllJournalCongress
                 string strFilter = "(" + "((isConfirmed = 0) OR (isConfirmed = 1 and isLinkPetitionLeave = 1 and isConfirmed_LinkPetitionLeave = 0))";
 
                 if (chbCongressAccept.Checked) {
-                    strFilter += $" OR (isLinkPetitionLeave = 0 AND isConfirmed = 1)";
+                    strFilter += $" OR (isLinkPetitionLeave = 0 AND isConfirmed = 1 AND isCancelAgreements is null)";
                 }
                 if (chbDropAgreements.Checked) {
                     strFilter += $" OR ((isLinkPetitionLeave = 1 AND isConfirmed_LinkPetitionLeave = 1) OR (isCancelAgreements is not null AND isConfirmed = 1 ))";

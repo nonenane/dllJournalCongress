@@ -270,8 +270,6 @@
             // 
             this.chbCongressAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbCongressAccept.AutoSize = true;
-            this.chbCongressAccept.Checked = true;
-            this.chbCongressAccept.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chbCongressAccept.Location = new System.Drawing.Point(40, 516);
             this.chbCongressAccept.Name = "chbCongressAccept";
             this.chbCongressAccept.Size = new System.Drawing.Size(133, 17);
