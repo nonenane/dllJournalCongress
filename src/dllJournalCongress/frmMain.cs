@@ -95,10 +95,11 @@ namespace dllJournalCongress
                     filter += (filter.Length == 0 ? "" : " and ") + $"id_ObjectLease  = {cmbObject.SelectedValue}";
 
 
-                string strFilter = "("
-                    + "((isLinkPetitionLeave = 0 AND isConfirmed = 0) " +
-                    "OR (isLinkPetitionLeave = 1 AND isConfirmed_LinkPetitionLeave = 0) " +
-                    "OR (isCancelAgreements is null AND isConfirmed = 1 AND isConfirmed_LinkPetitionLeave = 0))";
+                //string strFilter = "("
+                //    + "((isLinkPetitionLeave = 0 AND isConfirmed = 0) " +
+                //    "OR (isLinkPetitionLeave = 1 AND isConfirmed_LinkPetitionLeave = 0) " +
+                //    "OR (isCancelAgreements is null AND isConfirmed = 1 AND isConfirmed_LinkPetitionLeave = 0))";
+                string strFilter = "(" + "((isConfirmed = 0) OR (isConfirmed = 1 and isLinkPetitionLeave = 1 and isConfirmed_LinkPetitionLeave = 0))";
 
                 if (chbCongressAccept.Checked) {
                     strFilter += $" OR (isLinkPetitionLeave = 0 AND isConfirmed = 1)";
