@@ -64,7 +64,7 @@ from
 		left join Arenda.j_AdditionalDocuments ddd  on ddd.id_PetitionLeave = ad.id
 		left join Arenda.j_AddDocConfirmed adcddd on adcddd.id_AdditionalDocuments = ddd.id
 where 
-	a.isConfirmed = 1 and td.Rus_Name = 'Заявление на съезд' and @dateStart<= ad.Date_of_Departure and ad.Date_of_Departure <= @dateEnd
+	a.isConfirmed = 1 and td.Rus_Name = 'Заявление на съезд' and @dateStart<= ad.Date_of_Departure and ad.Date_of_Departure <= @dateEnd and ad.isActive = 1
 	
 	
 	
